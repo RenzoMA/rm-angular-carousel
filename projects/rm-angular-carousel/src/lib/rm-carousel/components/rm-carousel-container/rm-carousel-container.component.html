@@ -1,0 +1,93 @@
+<div *ngIf="pageSize > 0">
+  <ng-container [ngSwitch]="position">
+    <ng-template
+      *ngSwitchCase="carouselControlPositionEnum.sides"
+      [ngTemplateOutlet]="controlsSideTemplate"
+    >
+    </ng-template>
+    <ng-template
+      *ngSwitchCase="carouselControlPositionEnum.top"
+      [ngTemplateOutlet]="controlsTopTemplate"
+    ></ng-template>
+    <ng-template
+      *ngSwitchCase="carouselControlPositionEnum.bottom"
+      [ngTemplateOutlet]="controlsBottomTemplate"
+    ></ng-template>
+  </ng-container>
+</div>
+
+<ng-template #carouselTemplate>
+  <div class="rm-carousel-wrapper">
+    <div #carousel class="rm-carousel-items">
+      <ng-content select="rm-carousel-item"></ng-content>
+    </div>
+    <div *ngIf="showBullets" class="rm-bullet-container">
+      <ng-container *ngFor="let index of bullets">
+        <span
+          class="rm-bullet"
+          [ngClass]="
+            index === currentPage ? 'rm-bullet-active' : 'rm-bullet-inactive'
+          "
+        ></span>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>
+<ng-template #prevButton> <button (click)="prev()">Prev</button> </ng-template>
+<ng-template #nextButton> <button (click)="next()">Next</button> </ng-template>
+
+<ng-template #controlsBottomTemplate>
+  <ng-container [ngTemplateOutlet]="carouselTemplate"> </ng-container>
+  <ng-container
+    *ngIf="showControls"
+    [ngTemplateOutlet]="previousButtonTemplate || prevButton"
+    [ngTemplateOutletContext]="{
+      prev: prev
+    }"
+  ></ng-container>
+  <ng-container
+    *ngIf="showControls"
+    [ngTemplateOutlet]="nextButtonTemplate || nextButton"
+    [ngTemplateOutletContext]="{
+      next: next
+    }"
+  ></ng-container>
+</ng-template>
+
+<ng-template #controlsTopTemplate>
+  <ng-container
+    *ngIf="showControls"
+    [ngTemplateOutlet]="previousButtonTemplate || prevButton"
+    [ngTemplateOutletContext]="{
+      prev: prev
+    }"
+  ></ng-container>
+  <ng-container
+    *ngIf="showControls"
+    [ngTemplateOutlet]="nextButtonTemplate || nextButton"
+    [ngTemplateOutletContext]="{
+      next: next
+    }"
+  ></ng-container>
+  <ng-container [ngTemplateOutlet]="carouselTemplate"> </ng-container>
+</ng-template>
+
+<ng-template #controlsSideTemplate>
+  <div class="rm-side-template-wrapper">
+    <ng-container
+      *ngIf="showControls"
+      [ngTemplateOutlet]="previousButtonTemplate || prevButton"
+      [ngTemplateOutletContext]="{
+        prev: prev
+      }"
+    ></ng-container>
+    <ng-container [ngTemplateOutlet]="carouselTemplate"> </ng-container>
+    <ng-container
+      *ngIf="showControls"
+      [ngTemplateOutlet]="nextButtonTemplate || nextButton"
+      [ngTemplateOutletContext]="{
+        next: next
+      }"
+    ></ng-container>
+  </div>
+</ng-template>

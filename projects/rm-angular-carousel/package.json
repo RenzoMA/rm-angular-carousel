@@ -1,0 +1,13 @@
+{
+  "name": "rm-angular-carousel",
+  "version": "0.0.2",
+  "peerDependencies": {
+    "@angular/common": "^7.0.0",
+    "@angular/core": "^7.0.0"
+  },
+  "keywords": [
+    "angular",
+    "carousel",
+    "angular6"
+  ]
+}

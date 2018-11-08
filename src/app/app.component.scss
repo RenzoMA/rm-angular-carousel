@@ -1,0 +1,12 @@
+.sections {
+  display: flex;
+  .section-1 {
+    flex: 2;
+  }
+  .section-2 {
+    flex: 4;
+  }
+  .element {
+    border: 1px solid red;
+  }
+}

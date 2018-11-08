@@ -1,0 +1,36 @@
+.rm-carousel-items {
+  display: flex;
+}
+.rm-carousel-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+.rm-side-template-wrapper {
+  display: flex;
+  align-items: center;
+  .rm-carousel-wrapper {
+    flex: 1;
+  }
+}
+.rm-bullet-container {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  .rm-bullet:before {
+    content: ' \25CF';
+  }
+  .rm-bullet-active {
+    transition: color 250ms ease-in;
+    color: black;
+    font-size: 1.3em;
+  }
+  .rm-bullet-inactive {
+    transition: color 250ms ease-in;
+    color: #cdd1d3;
+    font-size: 1.2em;
+  }
+}

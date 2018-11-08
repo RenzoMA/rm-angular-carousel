@@ -10,7 +10,7 @@
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "sass"
+          "styleext": "scss"
         }
       },
       "architect": {
@@ -27,7 +27,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -83,7 +83,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.sass"
+              "src/styles.scss"
             ],
             "scripts": [],
             "assets": [
@@ -127,6 +127,41 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "rm-angular-carousel": {
+      "root": "projects/rm-angular-carousel",
+      "sourceRoot": "projects/rm-angular-carousel/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/rm-angular-carousel/tsconfig.lib.json",
+            "project": "projects/rm-angular-carousel/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/rm-angular-carousel/src/test.ts",
+            "tsConfig": "projects/rm-angular-carousel/tsconfig.spec.json",
+            "karmaConfig": "projects/rm-angular-carousel/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/rm-angular-carousel/tsconfig.lib.json",
+              "projects/rm-angular-carousel/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]

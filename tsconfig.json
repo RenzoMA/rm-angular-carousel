@@ -16,6 +16,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "rm-angular-carousel": [
+        "dist/rm-angular-carousel"
+      ],
+      "rm-angular-carousel/*": [
+        "dist/rm-angular-carousel/*"
+      ]
+    }
   }
 }
