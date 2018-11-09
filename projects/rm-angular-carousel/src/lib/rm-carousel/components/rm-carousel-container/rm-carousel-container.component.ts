@@ -11,35 +11,35 @@ import {
   SimpleChanges,
   TemplateRef,
   HostListener
-} from '@angular/core';
-import { RmCarouselItemComponent } from '../rm-carousel-item/rm-carousel-item.component';
+} from "@angular/core";
+import { RmCarouselItemComponent } from "../rm-carousel-item/rm-carousel-item.component";
 import {
   animate,
   AnimationBuilder,
   AnimationFactory,
   AnimationPlayer,
   style
-} from '@angular/animations';
-import { CarouselControlPositionEnum } from '../../enum/carousel-control-position.enum';
+} from "@angular/animations";
+import { CarouselControlPositionEnum } from "../../enum/carousel-control-position.enum";
 
 @Component({
-  selector: 'rm-carousel-container',
-  templateUrl: './rm-carousel-container.component.html',
-  styleUrls: ['./rm-carousel-container.component.scss']
+  selector: "rm-carousel-container",
+  templateUrl: "./rm-carousel-container.component.html",
+  styleUrls: ["./rm-carousel-container.component.scss"]
 })
 export class RmCarouselContainerComponent
   implements OnInit, AfterViewInit, OnChanges {
-  @ViewChild('carousel')
+  @ViewChild("carousel")
   carousel: ElementRef;
   @ContentChildren(RmCarouselItemComponent)
   carouselItems: QueryList<RmCarouselItemComponent>;
 
   @Input() pageSize: number = 5;
-  @Input() timing = '250ms ease-in';
+  @Input() timing = "250ms ease-in";
   @Input() showControls = true;
   @Input() nextButtonTemplate: TemplateRef<any>;
   @Input() previousButtonTemplate: TemplateRef<any>;
-  @Input() position: string = 'sides';
+  @Input() position: string = "sides";
   @Input() showBullets = true;
 
   private player: AnimationPlayer;
@@ -56,6 +56,14 @@ export class RmCarouselContainerComponent
     this.setItemWidth();
     this.setItemsStyle();
     this.setBullets();
+    this.subscribeToChanges();
+  }
+  subscribeToChanges() {
+    this.carouselItems.changes.subscribe(items => {
+      this.setItemWidth();
+      this.setItemsStyle();
+      this.setBullets();
+    });
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (this.carouselItems && this.pageSize > 0) {
@@ -81,7 +89,7 @@ export class RmCarouselContainerComponent
     return false;
   };
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener("window:resize", ["$event"])
   onResize(event) {
     while (this.prev()) {}
     this.setItemsStyle();
